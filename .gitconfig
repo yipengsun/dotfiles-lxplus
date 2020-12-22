@@ -1,0 +1,26 @@
+[user]
+    name = Yipeng Sun
+    email = syp@umd.edu
+
+[core]
+    editor = vim
+    pager = less
+    quotepath = false
+
+[merge]
+    tool = vimdiff
+
+[color]
+    grep = auto
+    status = auto
+    branch = auto
+    ui = auto
+
+[branch]
+    autosetuprebase = always
+
+[merge "ours"]
+    driver = true
+
+[pull]
+	rebase = false
