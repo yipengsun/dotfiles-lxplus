@@ -1,18 +1,32 @@
-###########
-# Plugins #
-###########
-# Currently managed by zinit
+##################
+# Plugin manager #
+##################
+# Currently use zinit
 
-# Initialize zinit plugin manager
 source ~/.zinit/bin/zinit.zsh
+
+
+###############
+# Keybindings #
+###############
+
+# Install 'fzf' locally
+zinit ice from"gh-r" as"program"
+zinit load junegunn/fzf-bin
+
+
+##########
+# Prompt #
+##########
 
 # Pure prompt
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 zinit light sindresorhus/pure
 
-# Syntax high light
-zinit light zdharma/fast-syntax-highlighting
 
-# Install 'fzf' locally
-zinit ice from"gh-r" as"program"
-zinit load junegunn/fzf-bin
+####################
+# Syntax highlight #
+####################
+# This must be loaded at the end of the config
+
+zinit light zsh-users/zsh-syntax-highlighting
