@@ -29,4 +29,4 @@ zinit light sindresorhus/pure
 ####################
 # This must be loaded at the end of the config
 
-zinit light zsh-users/zsh-syntax-highlighting
+zinit load zsh-users/zsh-syntax-highlighting
