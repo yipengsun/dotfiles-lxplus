@@ -70,6 +70,9 @@ export READNULLCMD=less
 export LESS="-M -i -R --shift 5"
 export LESSCHARSET=utf-8
 
+# Customize ls output color scheme
+[[ -f $HOME/.lscolors ]] && eval $(dircolors -b $HOME/.lscolors)
+
 
 ##############
 # Completion #
