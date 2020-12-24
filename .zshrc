@@ -97,6 +97,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Ignore folders that are part of current path
 zstyle ':completion:*' ignore-parents parent pwd directory
 
+# Force rehash when command not found
+_force_rehash() {
+  (( CURRENT == 1 )) && rehash
+  return 1
+}
+
 # Menu select in completion
 zstyle ':completion:*'               menu select=2
 zstyle ':completion:*'               completer _oldlist _expand _force_rehash _complete _match
