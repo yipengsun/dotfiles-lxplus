@@ -12,6 +12,8 @@ source ~/.zinit/bin/zinit.zsh
 # Settings #
 ############
 
+autoload -U colors && colors
+
 setopt complete_aliases        # Do not expand aliases before_ completion has finished
 setopt auto_pushd              # Automatically pushd directories on dirstack
 setopt auto_continue           # Automatically send SIGCON to disowned jobs
@@ -44,7 +46,6 @@ export SAVEHIST=5000
 export HISTFILE=$HOME/.cache/zsh/zsh_history
 
 # Colored man pages
-autoload -U colors && colors
 # bold & blinking mode
 export LESS_TERMCAP_mb="${fg_bold[red]}"
 export LESS_TERMCAP_md="${fg_bold[red]}"
@@ -65,9 +66,9 @@ export EDITOR=vim
 export VISUAL=vim
 
 export PAGER=less
+export READNULLCMD=less
 export LESS="-M -i -R --shift 5"
 export LESSCHARSET=utf-8
-export READNULLCMD=less
 
 
 ###############
