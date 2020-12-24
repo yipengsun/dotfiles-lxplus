@@ -44,17 +44,17 @@ export SAVEHIST=5000
 export HISTFILE=$HOME/.cache/zsh/zsh_history
 
 # Colored man pages
-export PAGER=less
-export LESS_TERMCAP_md=$'\E[1;31m'
-export LESS_TERMCAP_mb=$'\E[1;31m'
-export LESS_TERMCAP_me=$'\E[m'
-export LESS_TERMCAP_so=$'\E[01;7;34m'
-export LESS_TERMCAP_se=$'\E[m'
-export LESS_TERMCAP_us=$'\E[1;2;32m'
-export LESS_TERMCAP_ue=$'\E[m'
-export LESS="-M -i -R --shift 5"
-export LESSCHARSET=utf-8
-export READNULLCMD=less
+autoload -U colors && colors
+# bold & blinking mode
+export LESS_TERMCAP_mb="${fg_bold[red]}"
+export LESS_TERMCAP_md="${fg_bold[red]}"
+export LESS_TERMCAP_me="${reset_color}"
+# standout mode
+export LESS_TERMCAP_so="${fg_bold[yellow]}${bg[blue]}"
+export LESS_TERMCAP_se="${reset_color}"
+# underlining
+export LESS_TERMCAP_us="${fg_bold[green]}"
+export LESS_TERMCAP_ue="${reset_color}"
 
 
 ###########################
@@ -63,6 +63,11 @@ export READNULLCMD=less
 
 export EDITOR=vim
 export VISUAL=vim
+
+export PAGER=less
+export LESS="-M -i -R --shift 5"
+export LESSCHARSET=utf-8
+export READNULLCMD=less
 
 
 ###############
