@@ -300,3 +300,10 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=black,bold'
 ZSH_HIGHLIGHT_STYLES[named-fd]='bold'
 ZSH_HIGHLIGHT_STYLES[numeric-fd]='bold'
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=green,bold'
+
+
+##########################
+# Host-specific settings #
+##########################
+
+[[ -f $HOME/.zshrc.host ]] && source $HOME/.zshrc.host
