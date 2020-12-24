@@ -71,6 +71,39 @@ export LESS="-M -i -R --shift 5"
 export LESSCHARSET=utf-8
 
 
+##############
+# Completion #
+##############
+
+autoload -Uz compinit && compinit
+
+# use cache to speed up completion
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path $HOME/.cache/zsh
+
+# Completion options
+zstyle ':completion:*:matches'      group            'yes'
+zstyle ':completion:*'              group-name       ''
+zstyle ':completion:*:options'      description      'yes'
+zstyle ':completion:*:options'      auto-description '%d'
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+
+# Configure completion list module
+zmodload -i zsh/complist
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Ignore folders that are part of current path
+zstyle ':completion:*' ignore-parents parent pwd directory
+
+# Menu select in completion
+zstyle ':completion:*'               menu select=2
+zstyle ':completion:*'               completer _oldlist _expand _force_rehash _complete _match
+zstyle ':completion:*:match:*'       original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+
 ###############
 # Keybindings #
 ###############
