@@ -123,7 +123,12 @@ zstyle ':completion:*:corrections'  format "${bg_bold[red]} %d (errors: %e) ${re
 # Keybindings #
 ###############
 
-# Install 'fzf' locally
+autoload -U zkbd
+
+# Use emacs style keybindings
+bindkey -e
+
+# Install fzf locally
 zinit ice from"gh-r" as"program"
 zinit load junegunn/fzf-bin
 
@@ -157,6 +162,90 @@ fzf-history-widget() {
 
 zle -N fzf-history-widget
 bindkey '^R' fzf-history-widget
+
+# Allow 'cd ...'
+expand-multiple-dots() {
+    local MATCH
+    if [[ $LBUFFER =~ '(^| )\.\.\.+' ]]; then
+        LBUFFER=$LBUFFER:fs%\.\.\.%../..%
+    fi
+}
+
+expand-multiple-dots-then-expand-or-complete() {
+    zle expand-multiple-dots
+    zle expand-or-complete
+}
+
+expand-multiple-dots-then-accept-line() {
+    zle expand-multiple-dots
+    zle accept-line
+}
+
+zle -N expand-multiple-dots
+zle -N expand-multiple-dots-then-expand-or-complete
+zle -N expand-multiple-dots-then-accept-line
+
+bindkey '^I' expand-multiple-dots-then-expand-or-complete
+bindkey '^M' expand-multiple-dots-then-accept-line
+
+# Add 'sudo' to current line
+sudo-command-line() {
+    [[ -z $BUFFER ]] && zle up-history
+    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+    zle end-of-line
+}
+zle -N sudo-command-line
+
+typeset -A key
+
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+for k in ${(k)key} ; do
+    [[ ${key[$k]} == $'\eO'* ]] && key[$k]=${key[$k]/O/[}
+done
+
+# Set up key accordingly
+[[ -n "${key[Home]}"   ]] && bindkey "${key[Home]}"   beginning-of-line
+[[ -n "${key[End]}"    ]] && bindkey "${key[End]}"    end-of-line
+[[ -n "${key[Insert]}" ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n "${key[Delete]}" ]] && bindkey "${key[Delete]}" delete-char
+[[ -n "${key[Up]}"     ]] && bindkey "${key[Up]}"     up-line-or-history
+[[ -n "${key[Down]}"   ]] && bindkey "${key[Down]}"   down-line-or-history
+[[ -n "${key[Left]}"   ]] && bindkey "${key[Left]}"   backward-char
+[[ -n "${key[Right]}"  ]] && bindkey "${key[Right]}"  forward-char
+
+autoload history-search-end
+autoload -U edit-command-line
+
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+zle -N edit-command-line
+
+# Fallback mapping for tmux
+bindkey '\e\e' sudo-command-line
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[6~' history-beginning-search-forward-end
+bindkey '^[[5~' history-beginning-search-backward-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
+bindkey '^J' backward-word
+bindkey '^K' forward-word
+bindkey '^\' edit-command-line
+
+# Use the vi navigation keys besides cursor keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char         # left
+bindkey -M menuselect 'k' vi-up-line-or-history    # up
+bindkey -M menuselect 'l' vi-forward-char          # right
+bindkey -M menuselect 'j' vi-down-line-or-history  # bottom
 
 
 ##########
