@@ -8,6 +8,63 @@
 source ~/.zinit/bin/zinit.zsh
 
 
+############
+# Settings #
+############
+
+setopt complete_aliases        # Do not expand aliases before_ completion has finished
+setopt auto_pushd              # Automatically pushd directories on dirstack
+setopt auto_continue           # Automatically send SIGCON to disowned jobs
+setopt extended_glob           # So that patterns like ^() *~() ()# can be used
+setopt pushd_ignore_dups       # Do not push dups on stack
+setopt pushd_silent            # Be quiet about pushds and popds
+setopt brace_ccl               # Expand alphabetic brace expressions
+setopt complete_in_word        # Stay where it is and completion is done from both ends
+setopt correct                 # Spell check for commands only
+setopt hash_list_all           # Search all paths before command completion
+setopt hist_ignore_all_dups    # When runing a command several times, only store one
+setopt hist_ignore_space       # Do not remember commands starting with space
+setopt share_history           # Share history among sessions
+setopt hist_verify             # Reload full command when runing from history
+setopt hist_expire_dups_first  # Remove dups when max size reached
+setopt list_types              # Show ls -F style marks in file completion
+setopt long_list_jobs          # Show pid in bg job list
+setopt numeric_glob_sort       # When globbing numbered files, use real counting
+setopt no_hist_beep            # Don not beep on history expansion errors
+setopt hist_reduce_blanks      # Reduce whitespace in history
+setopt interactive_comments    # Comments in history
+setopt inc_append_history      # Append to history once executed
+
+# Exclude '/' from WORDCHARS so <Ctrl-w> will only delete part of the path
+WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
+
+# Comamnd history
+export HISTSIZE=5000
+export SAVEHIST=5000
+export HISTFILE=$HOME/.cache/zsh/zsh_history
+
+# Colored man pages
+export PAGER=less
+export LESS_TERMCAP_md=$'\E[1;31m'
+export LESS_TERMCAP_mb=$'\E[1;31m'
+export LESS_TERMCAP_me=$'\E[m'
+export LESS_TERMCAP_so=$'\E[01;7;34m'
+export LESS_TERMCAP_se=$'\E[m'
+export LESS_TERMCAP_us=$'\E[1;2;32m'
+export LESS_TERMCAP_ue=$'\E[m'
+export LESS="-M -i -R --shift 5"
+export LESSCHARSET=utf-8
+export READNULLCMD=less
+
+
+###########################
+# Environmental variables #
+###########################
+
+export EDITOR=vim
+export VISUAL=vim
+
+
 ###############
 # Keybindings #
 ###############
