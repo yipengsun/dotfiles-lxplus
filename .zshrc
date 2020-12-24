@@ -109,6 +109,12 @@ zstyle ':completion:*'               completer _oldlist _expand _force_rehash _c
 zstyle ':completion:*:match:*'       original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
+# Completion prompt format
+zstyle ':completion:*:descriptions' format "${bg_bold[blue]} %d ${reset_color}"
+zstyle ':completion:*:messages'     format "${bg_bold[blue]} %d ${reset_color}"
+zstyle ':completion:*:warnings'     format "${bg_bold[red]} No Matches Found ${reset_color}"
+zstyle ':completion:*:corrections'  format "${bg_bold[red]} %d (errors: %e) ${reset_color}"
+
 
 ###############
 # Keybindings #
