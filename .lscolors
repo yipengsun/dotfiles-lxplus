@@ -99,8 +99,8 @@ TERM xterm-termite
 #################
 
 RESET                  0        # reset to "normal" color
-NORMAL                 1        # no color code at all
-FILE                   1        # regular file
+NORMAL                 0        # no color code at all
+FILE                   0        # regular file
 MULTIHARDLINK          1        # regular file with more than one link
 DIR                    1;34     # directory 01;34
 LINK                   1;36     # symbolic link
