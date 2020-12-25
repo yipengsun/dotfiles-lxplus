@@ -85,10 +85,10 @@ zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path $HOME/.cache/zsh
 
 # Completion options
-zstyle ':completion:*:matches'      group            'yes'
-zstyle ':completion:*'              group-name       ''
-zstyle ':completion:*:options'      description      'yes'
-zstyle ':completion:*:options'      auto-description '%d'
+zstyle ':completion:*:matches' group            'yes'
+zstyle ':completion:*'         group-name       ''
+zstyle ':completion:*:options' description      'yes'
+zstyle ':completion:*:options' auto-description '%d'
 
 # Case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
@@ -190,10 +190,11 @@ bindkey '^M' expand-multiple-dots-then-accept-line
 
 # Add 'sudo' to current line
 sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
-    zle end-of-line
+  [[ -z $BUFFER ]] && zle up-history
+  [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+  zle end-of-line
 }
+
 zle -N sudo-command-line
 
 typeset -A key
@@ -208,8 +209,9 @@ key[Left]=${terminfo[kcub1]}
 key[Right]=${terminfo[kcuf1]}
 key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
+
 for k in ${(k)key} ; do
-    [[ ${key[$k]} == $'\eO'* ]] && key[$k]=${key[$k]/O/[}
+  [[ ${key[$k]} == $'\eO'* ]] && key[$k]=${key[$k]/O/[}
 done
 
 # Set up key accordingly
