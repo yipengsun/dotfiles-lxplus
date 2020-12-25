@@ -185,4 +185,7 @@ call plug#end()
 " Colorscheme settings
 colorscheme dracula
 
+" Highlight the 81st column
+set colorcolumn=81
+
 "}}}
