@@ -1,4 +1,4 @@
-# Ganga configuration file ($Name: Ganga-8-4-0 $). DO NOT remove this line.
+# Ganga configuration file ($Name: Ganga-8-4-4 $). DO NOT remove this line.
 #
 #=======================================================================
 # All  settings are  commented out,  so ganga  will apply  the default
@@ -175,7 +175,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  Type of the repository.
 #  Examples:
-#    LocalXML
+#    LocalXML, Database
 #repositorytype = LocalXML
 
 #  If TRUE (default), calling job.resubmit() will only resubmit FAILED subjobs.
@@ -212,7 +212,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  The file containing the python commands that the local DIRAC server can
 #  execute. The default DiracCommands.py is added automatically
-#DiracCommandFiles = ['/cvmfs/ganga.cern.ch/Ganga/install/8.4.0/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracDefinition.py', '/cvmfs/ganga.cern.ch/Ganga/install/8.4.0/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracCommands.py']
+#DiracCommandFiles = ['/cvmfs/ganga.cern.ch/Ganga/install/8.4.4/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracDefinition.py', '/cvmfs/ganga.cern.ch/Ganga/install/8.4.4/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracCommands.py']
 
 #  DEPRECATED. Ganga environment file for DIRAC environment (do not change
 #  unless you are sure you know what you are doing).
@@ -310,7 +310,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #splitFilesChunks = 5000
 
 #  Mapping between Dirac Job Major Status and Ganga Job Status
-#statusmapping = {'Checking': 'submitted', 'Completed': 'running', 'Deleted': 'failed', 'Done': 'completed', 'Failed': 'failed', 'Killed': 'failed', 'Matched': 'submitted', 'Received': 'submitted', 'Running': 'running', 'Staging': 'submitted', 'Stalled': 'running', 'Waiting': 'submitted'}
+#statusmapping = {'Checking': 'submitted', 'Completed': 'running', 'Completing': 'running', 'Deleted': 'failed', 'Done': 'completed', 'Failed': 'failed', 'Killed': 'failed', 'Matched': 'submitted', 'Received': 'submitted', 'Running': 'running', 'Staging': 'submitted', 'Stalled': 'running', 'Waiting': 'submitted'}
 
 #  Should we use the Ganga job ID to auto-construct a LFN relative path?
 #useGangaPath = False
@@ -326,7 +326,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  Docker Image for the database
 #baseImage = mongo
 
-#  Database Controller [Native, Docker, uDocker, Singularity]
+#  Database Controller [native, docker, udocker, singularity]
 #controller = docker
 
 #  host
@@ -493,6 +493,17 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  Do not revert job to new status even if submission failed. Option to
 #  j.submit(), see Job class for details
 #job_submit_keep_on_fail = False
+
+
+#=======================================================================
+#  This controls the OAuth client used for connecting to Google
+[Google]
+
+#  The client ID of the Oauth client that you have created yourself
+#client_id = 
+
+#  The client secret of the Oauth client that you have created yourself
+#client_secret = 
 
 
 #=======================================================================
@@ -687,9 +698,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #defaultPlatform = x86_64-centos7-gcc9-opt
 
 #  Files from these services will go to the output sandbox (unless
-#  overridden by the user in a specific job via the Job.outputdata field). Files
-#  from all other known handlers will go to output data (unless overridden by
-#  the user in a specific job via the Job.outputsandbox field).
+#  overridden by the user in a specific job via the Job.outputfiles field).
+#  Files     from all other known handlers will go to output data (unless
+#  overridden by     the user in a specific job via the Job.outputfiles field).
 #outputsandbox_types = ['CounterSummarySvc', 'NTupleSvc', 'HistogramPersistencySvc', 'MicroDSTStream', 'EvtTupleSvc']
 
 
@@ -1005,7 +1016,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  enable monitoring automatically at startup, in script mode monitoring is
 #  disabled by default, in interactive mode it is enabled
-#autostart = False
+#autostart = True
 
 #  enable populating of the monitoring worker threads
 #autostart_monThreads = True
@@ -2569,10 +2580,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 [defaults_Job]
 
 #  specification of the application to be executed
-#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7fad315a0ea8>
+#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f5c06f46548>
 
 #  specification of the resources to be used (e.g. batch system)
-#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7fad315ae7c8>
+#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f5c06f4de08>
 
 #  comment of the job
 #comment = 
@@ -2633,10 +2644,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 [defaults_JobTemplate]
 
 #  specification of the application to be executed
-#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7fad315b1778>
+#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f5c06f52db8>
 
 #  specification of the resources to be used (e.g. batch system)
-#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7fad315b17c8>
+#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f5c06f52e08>
 
 #  comment of the job
 #comment = 
