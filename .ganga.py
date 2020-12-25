@@ -21,7 +21,7 @@ def get_ntuple_filename(j):
             return name
 
 
-def gen_hadd_script(instructions, output_script, output_dir='$1'):
+def gen_hadd_script(instructions, output_script, input_dir, output_dir='$1'):
     from os.path import expanduser
     header = '''#!/bin/bash
 INPUT_DIR={}
