@@ -173,6 +173,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 
+" IDE
+Plug 'ervandew/supertab'
+
 call plug#end()
 
 " Colorscheme settings
