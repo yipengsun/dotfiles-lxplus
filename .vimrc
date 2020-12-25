@@ -157,7 +157,7 @@ inoremap <silent><F3> <C-R>=strftime("%F")<BAR><CR>
 
 "}}}
 
-"{{{ Plugins
+"{{{ Plugin manager
 
 filetype plugin indent on
 syntax on
@@ -177,6 +177,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'ervandew/supertab'
 
 call plug#end()
+
+"}}}
+
+"{{{ Color
 
 " Colorscheme settings
 colorscheme dracula
