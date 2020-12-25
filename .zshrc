@@ -304,6 +304,14 @@ ZSH_HIGHLIGHT_STYLES[numeric-fd]='bold'
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=green,bold'
 
 
+###########
+# Aliases #
+###########
+
+alias grep='grep -I --color=auto'
+alias du='du -hs'
+
+
 ##########################
 # Host-specific settings #
 ##########################
