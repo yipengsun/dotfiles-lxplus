@@ -2,3 +2,7 @@
 	path = .zinit/bin
 	url = https://github.com/zdharma/zinit.git
 	ignore = dirty
+[submodule ".vim/autoload"]
+	path = .vim/autoload
+	url = https://github.com/junegunn/vim-plug.git
+	ignore = dirty
