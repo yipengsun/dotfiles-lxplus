@@ -54,13 +54,6 @@ set expandtab
 
 "}}}
 
-"{{{ Colors
-
-" Colorscheme settings
-colorscheme dracula
-
-"}}}
-
 "{{{ Interface
 
 " UI settings
@@ -179,5 +172,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+
+call plug#end()
+
+" Colorscheme settings
+colorscheme dracula
 
 "}}}
