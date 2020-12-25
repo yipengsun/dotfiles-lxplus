@@ -113,10 +113,10 @@ zstyle ':completion:*:match:*'       original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
 # Completion prompt format
-zstyle ':completion:*:descriptions' format "${bg_bold[blue]}>>> %d ${reset_color}"
-zstyle ':completion:*:messages'     format "${bg_bold[blue]}>>> %d ${reset_color}"
-zstyle ':completion:*:warnings'     format "${bg_bold[red]}>>> no match found ${reset_color}"
-zstyle ':completion:*:corrections'  format "${bg_bold[red]}>>> %d (errors: %e) ${reset_color}"
+zstyle ':completion:*:descriptions' format "${bg_bold[yellow]} %d ${reset_color}"
+zstyle ':completion:*:messages'     format "${bg_bold[yellow]} %d ${reset_color}"
+zstyle ':completion:*:warnings'     format "${bg_bold[red]} no match found ${reset_color}"
+zstyle ':completion:*:corrections'  format "${bg_bold[red]} %d (errors: %e) ${reset_color}"
 
 
 ###############
@@ -165,20 +165,20 @@ bindkey '^R' fzf-history-widget
 
 # Allow 'cd ...'
 expand-multiple-dots() {
-    local MATCH
-    if [[ $LBUFFER =~ '(^| )\.\.\.+' ]]; then
-        LBUFFER=$LBUFFER:fs%\.\.\.%../..%
-    fi
+  local MATCH
+  if [[ $LBUFFER =~ '(^| )\.\.\.+' ]]; then
+    LBUFFER=$LBUFFER:fs%\.\.\.%../..%
+  fi
 }
 
 expand-multiple-dots-then-expand-or-complete() {
-    zle expand-multiple-dots
-    zle expand-or-complete
+  zle expand-multiple-dots
+  zle expand-or-complete
 }
 
 expand-multiple-dots-then-accept-line() {
-    zle expand-multiple-dots
-    zle accept-line
+  zle expand-multiple-dots
+  zle accept-line
 }
 
 zle -N expand-multiple-dots
