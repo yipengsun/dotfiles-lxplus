@@ -22,37 +22,39 @@ def get_ntuple_filename(j):
 
 
 def gen_hadd_script(instructions, output_script, input_dir, output_dir='$1',
-                    min_ntuple_size=2):
+                    min_ntuple_size=500):
     from os.path import expanduser
 
     header = '''#!/usr/bin/env bash
 INPUT_DIR={}
 OUTPUT_DIR={}
-MIN_NTUPLE_SIZE={}  # in MiB
+MIN_NTUPLE_SIZE={}  # in KiB
 
 '''.format(input_dir, output_dir, min_ntuple_size)
 
     functions = '''
 function check_job () {
   local error=0
+  local job_dir=${INPUT_DIR}/$1
 
-  for sj in $(ls $1 | grep -E "^[0-9]$"); do
-    local file=$(find $1/$sj -name '*.root')
+  echo "Verifying output for Job $1..."
+
+  for sj in $(ls $job_dir | grep -E "^[0-9]$"); do
+    local file=$(find $job_dir/$sj/output -name '*.root')
 
     if [[ -z $file ]]; then
       let "error++"
-      echo "ntuple missing in subjob $sj"
+      echo "subjob $sj: ntuple missing!"
     else
-      # Size in MiB
-      local size=$(du -b $file | awk '{print int($1 / 1024 / 1024)}')
+      local size=$(du -b $file | awk '{print int($1 / 1024)}')  # in KiB
       if [ $size -lt ${MIN_NTUPLE_SIZE} ]; then
         let "error++"
-        echo "ntuple has a size of $size MiB, which is too small!"
+        echo "subjob $sj: ntuple has a size of $size KiB, which is too small!"
       fi
     fi
   done
 
-  if [ $size -gt 0 ]; then
+  if [ $error -gt 0 ]; then
     echo "Job $1 output verification failed with $error error(s)."
   fi
 
@@ -74,7 +76,7 @@ function concat_job () {
         f.write(functions)
 
         for idx, orig_filename, hadd_filename in instructions:
-            f.write('check_job {idx} {orig_filename} {hadd_filename}\n'.format(
+            f.write('concat_job {idx} {orig_filename} {hadd_filename}\n'.format(
                 hadd_filename=hadd_filename, idx=idx,
                 orig_filename=orig_filename))
 
