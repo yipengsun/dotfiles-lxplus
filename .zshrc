@@ -196,6 +196,7 @@ sudo-command-line() {
 }
 
 zle -N sudo-command-line
+bindkey '\e\e' sudo-command-line
 
 typeset -A key
 
@@ -231,12 +232,7 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 zle -N edit-command-line
 
-# Fallback mapping for tmux
-bindkey '\e\e' sudo-command-line
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
-bindkey '^[[6~' history-beginning-search-forward-end
-bindkey '^[[5~' history-beginning-search-backward-end
+# Some personal mappings
 bindkey '^P' history-beginning-search-backward-end
 bindkey '^N' history-beginning-search-forward-end
 bindkey '^J' backward-word
