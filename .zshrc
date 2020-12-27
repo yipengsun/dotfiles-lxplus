@@ -143,6 +143,7 @@ fzf_cmd() {
 }
 
 # CTRL-R - Paste the selected command from history into the command line
+# Implementation stolen from nix-darwin
 fzf-history-widget() {
   local selected num
   setopt localoptions noglobsubst pipefail 2> /dev/null
@@ -151,9 +152,7 @@ fzf-history-widget() {
   local ret=$?
   if [ -n "$selected" ]; then
     num=$selected[1]
-    if [ -n "$num" ]; then
-      zle vi-fetch-history -n $num
-    fi
+    [ -n "$num" ] && zle vi-fetch-history -n $num
   fi
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -165,10 +164,7 @@ bindkey '^R' fzf-history-widget
 
 # Allow 'cd ...'
 expand-multiple-dots() {
-  local MATCH
-  if [[ $LBUFFER =~ '(^| )\.\.\.+' ]]; then
-    LBUFFER=$LBUFFER:fs%\.\.\.%../..%
-  fi
+  [[ $LBUFFER =~ '(^| )\.\.\.+' ]] && LBUFFER=$LBUFFER:fs%\.\.\.%../..%
 }
 
 expand-multiple-dots-then-expand-or-complete() {
