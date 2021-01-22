@@ -301,7 +301,9 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=green,bold'
 ###########
 
 alias grep='grep -I --color=auto'
+alias df='df -hT'
 alias du='du -hs'
+alias ps='ps -Aa'
 
 
 ##########################
