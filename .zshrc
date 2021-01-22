@@ -7,11 +7,6 @@
 
 source ~/.zinit/bin/zinit.zsh
 
-# Install git-annex
-zinit ice as"program" extract'-'
-zinit snippet \
-  https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
-
 
 ############
 # Settings #
