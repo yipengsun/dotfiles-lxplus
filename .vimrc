@@ -170,7 +170,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Bare minimum plugins
 Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdcommenter'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 
 " IDE
