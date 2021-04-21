@@ -8,8 +8,13 @@ POLARITY = {'Up': 'mag_up', 'Down': 'mag_down'}
 SIMULATION = {'Pythia6': 'py6', 'Pythia8': 'py8'}
 
 
-def normalize_hadd_filename(job_name):
-    return job_name + '.root'
+def normalize_hadd_filename(job):
+    # For newer jobs, the canonical job filename is stored in the 'comment'
+    # field of the job
+    if job.comment:
+        return job.comment
+
+    return job.name + '.root'
 
 
 def get_ntuple_filename(j):
@@ -108,7 +113,7 @@ def print_job_hadd_filename(init_idx=0):
         if j.id >= init_idx:
             print('----')
             print('Job {}: {}'.format(j.id, j.status))
-            print('hadd filename: {}'.format(normalize_hadd_filename(j.name)))
+            print('hadd filename: {}'.format(normalize_hadd_filename(j)))
 
 
 def hadd_completed_job_output(
@@ -131,6 +136,6 @@ def hadd_completed_job_output(
                     continue
 
             instructions.append((j.id, get_ntuple_filename(j),
-                                 normalize_hadd_filename(j.name)))
+                                 normalize_hadd_filename(j)))
 
     gen_hadd_script(instructions, output_script, input_dir)
