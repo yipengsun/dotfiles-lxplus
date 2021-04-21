@@ -35,6 +35,11 @@ INPUT_DIR={}
 OUTPUT_DIR={}
 MIN_NTUPLE_SIZE={}  # in KiB
 
+# User-specific settings, change them according to your environment!
+LNG_PATH=$HOME/eos/src/lhcb-ntuples-gen
+PATH=$LNG_PATH/scripts:$PATH
+YAML_PATH=$LNG_PATH/postprocess/skims
+
 '''.format(input_dir, output_dir, min_ntuple_size)
 
     functions = '''
@@ -70,7 +75,8 @@ function concat_job () {
   check_job $1
 
   if [ $? -eq 0 ]; then
-    hadd -fk ${OUTPUT_DIR}/$3 ${INPUT_DIR}/$1/*/output/$2
+    haddcut.py ${OUTPUT_DIR}/$3 ${INPUT_DIR}/$1/*/output/$2 \
+        -c $YAML_PATH/rdx.yml
   fi
 }
 
