@@ -75,7 +75,7 @@ function concat_job () {
   check_job $1
 
   if [ $? -eq 0 ]; then
-    haddcut.py ${OUTPUT_DIR}/$3 ${INPUT_DIR}/$1/*/output/$2 \
+    haddcut.py ${OUTPUT_DIR}/$3 ${INPUT_DIR}/$1/*/output/$2 \\
         -c $YAML_PATH/rdx.yml
   fi
 }
