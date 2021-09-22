@@ -3,4 +3,4 @@ export CMTCONFIG=x86_64-centos7-gcc9-opt   # For DaVinci/v45r6
 #export CMTCONFIG=x86_64-centos7-gcc8-opt   # For Castelao/v3r4
 export BINARY_TAG=$CMTCONFIG
 
-export PATH=$HOME/opt/git-annex:$PATH
+export PATH=$HOME/.local/bin:$HOME/opt/git-annex:$PATH
