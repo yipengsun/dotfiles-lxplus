@@ -1,4 +1,4 @@
-# Ganga configuration file ($Name: Ganga-8-4-4 $). DO NOT remove this line.
+# Ganga configuration file ($Name: Ganga-8-5-3 $). DO NOT remove this line.
 #
 #=======================================================================
 # All  settings are  commented out,  so ganga  will apply  the default
@@ -50,6 +50,9 @@
 #=======================================================================
 #  Settings for Condor Batch system
 [Condor]
+
+#  Set maximum bytes to display with peek()
+#MaxBytes = 1000000
 
 #  Query global condor queues, i.e. use '-global' flag
 #query_global_queues = True
@@ -212,7 +215,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  The file containing the python commands that the local DIRAC server can
 #  execute. The default DiracCommands.py is added automatically
-#DiracCommandFiles = ['/cvmfs/ganga.cern.ch/Ganga/install/8.4.4/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracDefinition.py', '/cvmfs/ganga.cern.ch/Ganga/install/8.4.4/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracCommands.py']
+#DiracCommandFiles = ['/cvmfs/ganga.cern.ch/Ganga/install/8.5.3/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracDefinition.py', '/cvmfs/ganga.cern.ch/Ganga/install/8.5.3/lib/python3.6/site-packages/ganga/GangaDirac/Lib/Server/DiracCommands.py']
 
 #  DEPRECATED. Ganga environment file for DIRAC environment (do not change
 #  unless you are sure you know what you are doing).
@@ -380,7 +383,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #jobs_columns_width = {'fqid': 8, 'status': 10, 'name': 10, 'subjobs': 8, 'application': 15, 'backend': 15, 'backend.actualCE': 45, 'comment': 30, 'subjob status': 15}
 
 #  colours for jobs status
-#jobs_status_colours = {'new': 'fx.normal', 'submitted': 'fg.orange', 'running': 'fg.green', 'completed': 'fg.blue', 'failed': 'fg.red'}
+#jobs_status_colours = {'new': 'fx.normal', 'submitted': 'fg.orange', 'running': 'fg.green', 'completed': 'fg.blue', 'failed': 'fg.red', 'completed_frozen': 'fg.boldgrey', 'failed_frozen': 'fg.boldgrey'}
 
 #  list of job attributes to be printed in separate columns
 #tasks_columns = ('id', 'Type', 'Name', 'State', 'Comment', 'Jobs', '\x1b[44;97mdone\x1b[0;0m')
@@ -717,6 +720,11 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  String contains option name for name of job in batch system
 #jobnameopt = J
 
+#  A list containing (1) a regular expression used to substitute illegal
+#  substrings in a job name, and (2) the substring to replace such occurences
+#  with.
+#jobnamesubstitution = []
+
 #  String pattern for replay from the kill command
 #kill_res_pattern = (^Job <\d+> is being terminated)|(Job <\d+>: Job has already finished)|(Job <\d+>: No matching job found)
 
@@ -917,6 +925,11 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  String contains option name for name of job in batch system
 #jobnameopt = N
 
+#  A list containing (1) a regular expression used to substitute illegal
+#  substrings in a job name, and (2) the substring to replace such occurences
+#  with.
+#jobnamesubstitution = ['[\\s]', '_']
+
 #  String pattern for replay from the kill command
 #kill_res_pattern = (^$)|(qdel: Unknown Job Id)
 
@@ -1016,7 +1029,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  enable monitoring automatically at startup, in script mode monitoring is
 #  disabled by default, in interactive mode it is enabled
-#autostart = True
+#autostart = False
 
 #  enable populating of the monitoring worker threads
 #autostart_monThreads = True
@@ -1147,6 +1160,11 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  String contains option name for name of job in batch system
 #jobnameopt = N
 
+#  A list containing (1) a regular expression used to substitute illegal
+#  substrings in a job name, and (2) the substring to replace such occurences
+#  with.
+#jobnamesubstitution = ['[\\s:]', '_']
+
 #  String pattern for replay from the kill command
 #kill_res_pattern = (has registered the job +\d+ +for deletion)|(denied: job +"\d+" +does not exist)
 
@@ -1201,6 +1219,11 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  String contains option name for name of job in batch system
 #jobnameopt = J
+
+#  A list containing (1) a regular expression used to substitute illegal
+#  substrings in a job name, and (2) the substring to replace such occurences
+#  with.
+#jobnamesubstitution = []
 
 #  String pattern for replay from the kill command
 #kill_res_pattern = (^$)|(^scancel: error: .+)
@@ -1362,6 +1385,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  default attribute values for ArgSplitter objects
 [defaults_ArgSplitter]
 
+#  Append the subjob args to the existing application ones rather than replace
+#  them
+#append = False
+
 #  A list of lists of arguments to pass to script
 #args = []
 
@@ -1369,6 +1396,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #=======================================================================
 #  default attribute values for BKQuery objects
 [defaults_BKQuery]
+
+#  Check if the data set is archived
+#check_archived = True
 
 
 #credential_requirements = DiracProxy
@@ -1378,6 +1408,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  End date string yyyy-mm-dd (only works for type="RunsByDate")
 #endDate = 
+
+#  Return the data set, even if all the LFNs are archived
+#ignore_archived = False
 
 #  Bookkeeping query path (type dependent)
 #path = 
@@ -1408,6 +1441,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  default attribute values for BKTestQuery objects
 [defaults_BKTestQuery]
 
+#  Check if the data set is archived
+#check_archived = True
+
 
 #credential_requirements = DiracProxy
 
@@ -1422,6 +1458,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  number of files to release at a time
 #filesToRelease = 3
+
+#  Return the data set, even if all the LFNs are archived
+#ignore_archived = False
 
 #  Bookkeeping query path (type dependent)
 #path = 
@@ -2036,7 +2075,7 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #minProcessors = 1
 
 #  Settings for DIRAC job (e.g. CPUTime, BannedSites, etc.)
-#settings = {'CPUTime': 1209600}
+#settings = {'CPUTime': 1000000}
 
 
 #=======================================================================
@@ -2242,6 +2281,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  list of file objects that will be the inputdata for the job
 #files = []
 
+#  Treat the inputdata as inputfiles, i.e. copy the inputdata to the WN
+#treat_as_inputfiles = False
+
 
 #=======================================================================
 #  default attribute values for GangaDatasetSplitter objects
@@ -2283,11 +2325,18 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  application has been prepared.
 #is_prepared = None
 
+#  Number of cores to be provided via the "-j" option to the "make" command when
+#  building the ganga-input-sandbox
+#nMakeCores = 1
+
 #  List of files which contain the options I want to pass to gaudirun.py
 #options = []
 
 #  Platform the application was built for
 #platform = x86_64-centos7-gcc9-opt
+
+#  A list of arguments to pass to the lb-run script at run time. i.e. --quiet
+#run_args = []
 
 #  Should 'options' be run as "python options.py data.py" rather than
 #  "gaudirun.py options.py data.py"
@@ -2580,10 +2629,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 [defaults_Job]
 
 #  specification of the application to be executed
-#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f5c06f46548>
+#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f1d4e0330e8>
 
 #  specification of the resources to be used (e.g. batch system)
-#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f5c06f4de08>
+#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f1d4dfbcae8>
 
 #  comment of the job
 #comment = 
@@ -2644,10 +2693,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 [defaults_JobTemplate]
 
 #  specification of the application to be executed
-#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f5c06f52db8>
+#application = <GangaCore.Lib.Executable.Executable.Executable object at 0x7f1d4dfbfae8>
 
 #  specification of the resources to be used (e.g. batch system)
-#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f5c06f52e08>
+#backend = <GangaCore.Lib.Localhost.Localhost.Localhost object at 0x7f1d4dfbfb38>
 
 #  comment of the job
 #comment = 
@@ -2888,6 +2937,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #  Specify the dataset persistency technology
 #persistency = None
 
+#  Treat the inputdata as inputfiles, i.e. copy the inputdata to the WN
+#treat_as_inputfiles = False
+
 
 #=======================================================================
 #  default attribute values for LHCbCompressedFileSet objects
@@ -2915,6 +2967,9 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 
 #  Specify the dataset persistency technology
 #persistency = None
+
+#  Treat the inputdata as inputfiles, i.e. copy the inputdata to the WN
+#treat_as_inputfiles = False
 
 
 #=======================================================================
@@ -3101,6 +3156,10 @@ gangadir = /afs/cern.ch/user/s/suny/work/gangadir
 #=======================================================================
 #  default attribute values for Local objects
 [defaults_Local]
+
+#  Run a maximum of this number of subjobs in parallel. If value is negative use
+#  number of available CPUs
+#batchsize = -1
 
 #  should jobs really be submitted in parallel
 #force_parallel = False
