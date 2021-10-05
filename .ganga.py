@@ -102,7 +102,11 @@ def kill_uncompleted_subjobs(idx):
             sj.kill()
 
 
-def remake_uncompleted_job(idx, banned_sites=['LCG.NCBJ.pl', 'LCG.NIPNE-07.ro']):
+def remake_uncompleted_job(idx, banned_sites=[
+        'LCG.NCBJ.pl',
+        'LCG.NIPNE-07.ro',
+        'LCG.Beijing.cn'
+]):
     ds = LHCbDataset()
     for sj in jobs(idx).subjobs:
         if sj.status != 'completed':
