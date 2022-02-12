@@ -149,15 +149,16 @@ function concat_job () {
 # Job operations #
 ##################
 
-def show_failed_subjobs(idx):
-    print(jobs(idx).subjobs.select(status='failed'))
+def show_subjobs(idx, status='failed'):
+    print(jobs(idx).subjobs.select(status=status))
 
 
 def ban_site_for_job(idx, sites):
     if not isinstance(sites, list):
         sites = [sites]
 
-    jobs(idx).backend.settings['BannedSites'] += sites
+    for sj in jobs(idx).subjobs.select(status='failed'):
+        sj.backend.settings['BannedSites'] += sites
 
 
 def kill_uncompleted_subjobs(idx):
