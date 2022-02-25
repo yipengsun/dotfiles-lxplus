@@ -36,6 +36,9 @@ SKIM_CONFIG=./postprocess/skims/rdx_mc.yml  # NOTE: Make sure you pick the right
 OUTPUT_DIR={}
 MIN_NTUPLE_SIZE={}  # in KiB
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 '''.format(output_dir, min_ntuple_size)
 
     functions = '''
